@@ -6,8 +6,8 @@ public class Main {
 
     static Scanner input = new Scanner(System.in);
 
-    static String statusdorobo = null;
-    static int rampa = 0;
+    static String statusdoRobo = null, statusdoPrograma = null, statusdeComunicacao = null;
+    static int rampa = 0, contadordePecas = 0;
 
     public static void main(String[] args) {
 
@@ -19,6 +19,8 @@ public class Main {
                     [1] Parada de Emergência
                     [2] Status do Robô
                     [3] Status do Programa
+                    [4] Status de Comunicação
+                    [5] Contador de peças
                     """);
 
             escolha = input.nextInt();
@@ -26,7 +28,7 @@ public class Main {
             switch (escolha) {
 
                 case 1:
-                    System.out.println("Sistema encerrando!");
+                    System.out.print("Sistema encerrando!");
                     break;
 
                 case 2:
@@ -34,7 +36,11 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Programa em execução!");
+                    statusPrograma();
+                    break;
+
+                case 4:
+                    statusComunicacao();
                     break;
 
                 default:
@@ -47,12 +53,12 @@ public class Main {
     static void statusRobo() {
 
 
-        if (statusdorobo != null) {
+        if (statusdoRobo != null) {
 
             System.out.println("===============================");
-            System.out.println("Status do Robô: " + statusdorobo);
+            System.out.println("Status do Robô: " + statusdoRobo);
 
-            if (statusdorobo.equals("Em execução")) {
+            if (statusdoRobo.equals("Em execução")) {
                 System.out.println("Rampa " + rampa + " em execução");
             }
 
@@ -77,14 +83,14 @@ public class Main {
         switch (escolha) {
 
             case 1:
-                statusdorobo = "Em execução";
+                statusdoRobo = "Em execução";
 
                 System.out.println("Qual rampa está sendo utilizada?");
                 rampa = input.nextInt();
                 break;
 
             case 2:
-                statusdorobo = "Em repouso";
+                statusdoRobo = "Em repouso";
                 rampa = 0;
                 break;
 
@@ -94,12 +100,125 @@ public class Main {
         }
 
         System.out.println("===============================");
-        System.out.println("Status do Robô: " + statusdorobo);
+        System.out.println("Status do Robô: " + statusdoRobo);
 
-        if (statusdorobo.equals("Em execução")) {
+        if (statusdoRobo.equals("Em execução")) {
             System.out.println("Rampa " + rampa + " em execução");
         }
 
         System.out.println("===============================\n");
     }
+
+    static void statusPrograma(){
+
+        int escolha;
+
+        if(statusdoPrograma != null){
+
+            System.out.println("Status: "+statusdoPrograma);
+
+            System.out.println("Deseja mudar o estado do programa de controle do robô?\n[1] Sim\n[2] Não");
+            escolha = input.nextInt();
+
+            if (escolha == 1) {
+                System.out.println("O programa de controle do robô está:\n[1] Habilitado\n[2] Desabilitado");
+
+                escolha = input.nextInt();
+
+                switch (escolha) {
+                    case 1:
+                        statusdoPrograma = "Habilitado";
+                        break;
+
+                    case 2:
+                        statusdoPrograma = "Desabilitado";
+                        break;
+                }
+
+            }
+
+        }else{
+            System.out.println("O programa de controle do robô está:\n[1] Habilitado\n[2] Desabilitado");
+            escolha = input.nextInt();
+
+            switch (escolha){
+
+                case 1:
+                    statusdoPrograma = "Habilitado";
+                    break;
+
+                case 2:
+                    statusdoPrograma = "Desabilitado";
+                    break;
+
+                default:
+                    System.out.println("Opção indisponivel.");
+                    return;
+
+            }
+            System.out.println("Status: "+statusdoPrograma);
+
+
+        }
+
+
+
+
+    }
+
+    static void statusComunicacao(){
+
+        int escolha;
+
+        if(statusdeComunicacao != null){
+
+            System.out.println("Status de comunicação: "+statusdeComunicacao);
+
+        }else{
+
+            System.out.println("O estado de conexão com o sistema está:\n[1] Online\n[2] Offline");
+
+            escolha = input.nextInt();
+
+            switch (escolha){
+
+                case 1:
+                    statusdeComunicacao = "Online";
+                    break;
+
+                case 2:
+                    statusdeComunicacao = "Offline";
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+
+            }
+
+
+        }
+
+
+
+
+    }
+
+    static void contadorPecas(){
+
+        int escolha;
+
+        if(contadordePecas != 0){
+
+            System.out.println("Peças processadas até o momento: "+contadordePecas);
+
+            System.out.println("Deseja cadastrar o processamento de mais peças?");
+            escolha = input.nextInt();
+
+
+        }
+
+
+
+    }
+
 }
